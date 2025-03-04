@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Student Management</a>
+</nav>
+
+<div class="container mt-4">
+    <h1 class="text-center">Student List</h1>
+    <a th:href="@{/vikas/add}" class="btn btn-primary mb-3">Add Student</a>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.firstname}"></td>
+                <td th:text="${student.lastname}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.address}"></td>
+                <td>
+                    <a th:href="@{/vikas/edit/{id}(id=${student.id})}" class="btn btn-primary btn-sm">Edit</a>
+                    <form th:action="@{/vikas/{id}(id=${student.id})}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
